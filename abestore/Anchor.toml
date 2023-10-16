@@ -1,0 +1,15 @@
+[features]
+seeds = false
+skip-lint = false
+[programs.localnet]
+abestore = "56yBZ3rVNc66jSk29GgpeUVTJSkTVg6BtX2Yo5gQw85c"
+
+[registry]
+url = "https://api.apr.dev" 
+
+[provider]
+cluster = "localnet"
+wallet = "/Users/specterm1/.config/solana/id.json"
+
+[scripts]
+test = "node tests/abestore.js"    

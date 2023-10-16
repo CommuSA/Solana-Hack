@@ -1,2 +1,12 @@
 node_modules
+.DS_Store
+package-lock.json
 
+abestore/node_modules
+abestore/target
+abestore/**/*.rs.bk
+abestore/.anchor
+abestore/test-ledger
+abestore/.yarn
+abestore/dist
+abestore/build

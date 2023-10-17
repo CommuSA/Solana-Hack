@@ -5,13 +5,53 @@
     <link rel="icon" type="image" href="/src/Trypto.jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trypto</title>
+    <style>
+      .loader-wrapper {
+        display: flex;
+        justify-content: center;
+      }
+      .loader-title {
+        margin-top: 150px;
+        color: rgb(0, 100, 178);
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <div id="root">
+      <h1 class="loader-title">Welcome To Trypto!</h1>
       <div class="loader-wrapper">
-        <div class="loader">Loading...</div>
+        <canvas id="cav" width="150" height="150"></canvas>
       </div>
     </div>
+    <script>
+      var t = 0;
+      var tex = cav.getContext("2d");
+      var cir = {
+        o: [75, 75],
+        r: 20,
+      };
+      var long = 20;
+      setInterval(load, 100);
+      function load() {
+        tex.clearRect(0, 0, 1000, 1000);
+        for (var i = 0; i < 360; i += 45) {
+          tex.beginPath();
+          var cos = Math.cos(((i + t) / 180) * Math.PI);
+          var sin = Math.sin(((i + t) / 180) * Math.PI);
+          tex.moveTo(cir.o[0] + cir.r * cos, cir.o[1] - cir.r * sin);
+          tex.lineTo(
+            cir.o[0] + (cir.r + long) * cos,
+            cir.o[1] - (cir.r + long) * sin
+          );
+          tex.lineWidth = 3;
+          tex.lineCap = "round";
+          tex.strokeStyle = "rgba(0,100,170," + (i + 50) / 360 + ")";
+          tex.stroke();
+        }
+        t += 45;
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

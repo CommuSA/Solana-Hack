@@ -1,0 +1,7 @@
+.ant-image .ant-image-mask {
+  opacity: 1;
+}
+
+.ant-image .ant-image-mask:hover {
+  opacity: 0.5;
+}

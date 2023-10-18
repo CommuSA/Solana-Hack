@@ -1,25 +1,17 @@
 use borsh::{BorshDeserialize, BorshSerialize};
+use rabe::schemes::ac17::{Ac17MasterKey, Ac17PublicKey, Ac17SecretKey};
 use solana_program::{
     program_pack::{IsInitialized, Sealed},
     pubkey::Pubkey,
 };
-use crate::abe::*;
 
-#[cfg(not(feature = "borsh"))]
-use serde::{Serialize, Deserialize};
-#[cfg(feature = "borsh")]
-use borsh::{BorshSerialize, BorshDeserialize};
-
-
-#[derive(Clone, PartialEq, Debug)]
-#[cfg_attr(feature = "borsh", derive(BorshSerialize, BorshDeserialize))]
-#[cfg_attr(not(feature = "borsh"), derive(Serialize, Deserialize))]
+#[derive(Clone, PartialEq, Debug, BorshSerialize, BorshDeserialize)]
 pub struct StuffInfo {
     pub discriminator: String,
     pub is_initialized: bool,
     pub public_key: Ac17PublicKey,
-    pub secret_key: String,
-    pub master_key: String,
+    pub secret_key: Ac17SecretKey,
+    pub master_key: Ac17MasterKey,
     pub name: String,
     pub msg: String,
 }
@@ -58,7 +50,6 @@ impl IsInitialized for Reply {
         self.is_initialized
     }
 }
-
 
 // impl ToString for Ac17PublicKey {
 //     fn to_string(&self) -> String {

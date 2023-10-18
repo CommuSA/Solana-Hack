@@ -795,12 +795,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "036389c96016379f3d74081f7a83124ae0b8a0bf5e3cf8e8ba0fa6175b4afbab"
 dependencies = [
  "aes-gcm",
+ "borsh",
  "permutation",
  "pest",
  "pest_derive",
  "rabe-bn",
  "rand 0.8.5",
- "serde",
  "sha3 0.9.1",
 ]
 
@@ -810,6 +810,7 @@ version = "0.4.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "461eb5aa6c15e8e7b7d2c6d6083b1ed804f691bf2b428cd4fa7ae39e9f7b35a8"
 dependencies = [
+ "borsh",
  "byteorder",
  "rand 0.8.5",
  "serde",

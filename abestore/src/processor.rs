@@ -1,9 +1,9 @@
 use crate::error::StuffIntroError;
 use crate::instruction::IntroInstruction;
-use crate::abe::*;
 use crate::state::{Reply, ReplyCounter, StuffInfo};
+
 use borsh::BorshSerialize;
-use serde::Serialize;
+use rabe::schemes::ac17::setup;
 use solana_program::{
     account_info::{next_account_info, AccountInfo},
     borsh::try_from_slice_unchecked,
@@ -17,9 +17,6 @@ use solana_program::{
     sysvar::{rent::Rent, Sysvar},
 };
 use std::convert::TryInto;
-use rabe::utils::policy::pest::PolicyLanguage;
-use crate::abe::*;
-
 
 pub fn process_instruction(
     program_id: &Pubkey,
@@ -48,7 +45,7 @@ pub fn add_stuff_intro(
     msg!("Name: {}", name);
     msg!("Message: {}", message);
     let account_info_iter = &mut accounts.iter();
-    let (pk, msk) = setup();
+    let (pk, _msk) = setup();
     let initializer = next_account_info(account_info_iter)?;
     let user_account = next_account_info(account_info_iter)?;
     let reply_counter = next_account_info(account_info_iter)?;
@@ -99,7 +96,6 @@ pub fn add_stuff_intro(
         msg!("Account already initialized");
         return Err(ProgramError::AccountAlreadyInitialized);
     }
-
 
     account_data.public_key = pk;
     account_data.name = name;
@@ -197,7 +193,6 @@ pub fn update_stuff_intro(
         return Err(StuffIntroError::InvalidDataLength.into());
     }
 
-    account_data.name = account_data.name;
     account_data.msg = message;
     msg!("serializing account");
     account_data.serialize(&mut &mut user_account.data.borrow_mut()[..])?;

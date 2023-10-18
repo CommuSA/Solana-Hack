@@ -9,7 +9,7 @@ edition = "2021"
 solana-program = "=1.10.29"
 borsh = "0.9.3"
 thiserror = "1.0.31"
-rabe = "0.3.1"
+rabe = { version = "0.3.1", default-features = false, features = ["borsh"] }
 serde = "1.0.189"
 rabe-bn = "0.4.20"
 rand = "0.8.5"

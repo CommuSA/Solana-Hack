@@ -3,9 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
-  LaptopOutlined,
-  NotificationOutlined,
-  UserOutlined,
+  DatabaseOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import {
@@ -19,43 +18,17 @@ import {
 } from "antd";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { MenuItemType } from "antd/es/menu/hooks/useItems";
-import MenuItem from "antd/es/menu/MenuItem";
 import Home from "./Home/Home";
-import Database from "./Database/Database";
-import TTDB from "./TTDB/TTDB";
-import Node from "./Node/Node";
+import Database from "./Database";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { Text, Paragraph } = Typography;
 
 const items: MenuProps["items"] = [
-  getItem("Home", "/DeMap/Home", <LaptopOutlined />),
-  getItem("Database", "/DeMap/Database", <LaptopOutlined />),
-  getItem("TTDB", "/DeMap/TTDB", <LaptopOutlined />),
-  getItem("Node", "/DeMap/Node", <LaptopOutlined />),
+  getItem("Home", "/DeMap/Home", <HomeOutlined />),
+  getItem("Database", "/DeMap/Database", <DatabaseOutlined />),
 ];
 
-// const items: MenuProps["items"] = [
-//   UserOutlined,
-//   LaptopOutlined,
-//   NotificationOutlined,
-// ].map((icon, index) => {
-//   const key = String(index + 1);
-
-//   return {
-//     key: `sub${key}`,
-// icon: React.createElement(icon),
-//     label: `subnav ${key}`,
-
-//     children: new Array(4).fill(null).map((_, j) => {
-//       const subKey = index * 4 + j + 1;
-//       return {
-//         key: subKey,
-//         label: `option${subKey}`,
-//       };
-//     }),
-//   };
-// });
 
 export const DeMap = (props: any) => {
   console.log("props:: ", props);
@@ -64,7 +37,7 @@ export const DeMap = (props: any) => {
 
   console.log(renderPage);
   const navigate = useNavigate();
-  const changeMainPage = (e) => {
+  const changeMainPage = (e: { key: any; }) => {
     const { key } = e;
     console.log(key);
     navigate(key);
@@ -92,14 +65,14 @@ export const DeMap = (props: any) => {
                 <div style={title}> Trypto </div>{" "}
               </Col>
 
-              <Col span={4} offset={15} style={walletButton}>
-                <WalletMultiButton />{" "}
+              <Col span={4} offset={15} >
+                <WalletMultiButton style={walletButton}/>{" "}
               </Col>
             </Row>
           </Header>
           <Content>
-            <Layout style={{ padding: "24px 0", background: "#00090F" }}>
-              <Sider style={{}} width={200}>
+            <Layout style={{ height:"800px", padding: "4px 0", background: "#00090F" }}>
+              <Sider width={200}>
                 <Menu
                   mode="inline"
                   defaultSelectedKeys={["1"]}
@@ -114,7 +87,7 @@ export const DeMap = (props: any) => {
             </Layout>
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Trypto ©2023 Created by Ant UED
+            Trypto ©2023 Created by Specter
           </Footer>
         </Layout>
       </WalletContextProvider>
@@ -157,10 +130,6 @@ function switchPageFromPath(path: string) {
       return <Home />;
     case "/DeMap/Database":
       return <Database />;
-    case "/DeMap/TTDB":
-      return <TTDB />;
-    case "/DeMap/Node":
-      return <Node />;
     default:
       return <Home />;
   }
